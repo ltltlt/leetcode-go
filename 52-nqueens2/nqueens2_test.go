@@ -1,0 +1,1 @@
+../51-nqueens/nqueens2_test.go
