@@ -1,5 +1,7 @@
 package rematch_test
 
+// this code is sucks, not considered before, can optimize
+
 import (
 	"testing"
 
