@@ -20,7 +20,7 @@ func equal(s1, s2 string) bool {
 	return true
 }
 
-// use int64 to store hash, but what if needle is too long?
+// use int64 to store hash, but what if needle is too long to cause an overflow?
 // in this case, there is still a hash value for the string,
 // this value may be less than 0, this won't hurt,
 // since same string still have same hash, and string not same still usually don't have same hash
