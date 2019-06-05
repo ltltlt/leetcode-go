@@ -3,13 +3,9 @@ package reverse_list_test
 import (
 	"testing"
 
+	. "github.com/ltltlt/leetcode-util/listutil"
 	"github.com/stretchr/testify/assert"
 )
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
 
 func reverseBetween(head *ListNode, m int, n int) *ListNode {
 	var prev *ListNode // stores previous element of reversed list
@@ -42,41 +38,19 @@ func reverseBetween(head *ListNode, m int, n int) *ListNode {
 }
 
 func TestReverseBetween(t *testing.T) {
-	l := &ListNode{
-		1,
-		&ListNode{
-			2,
-			&ListNode{
-				3, &ListNode{
-					4, &ListNode{
-						5, nil,
-					},
-				},
-			},
-		},
-	}
+	l := NewList([]int{1, 2, 3, 4, 5})
 
 	l = reverseBetween(l, 2, 4)
-	assert.Equal(t, 1, l.Val)
-	assert.Equal(t, 4, l.Next.Val)
-	assert.Equal(t, 3, l.Next.Next.Val)
-	assert.Equal(t, 2, l.Next.Next.Next.Val)
-	assert.Equal(t, 5, l.Next.Next.Next.Next.Val)
-	assert.Equal(t, (*ListNode)(nil), l.Next.Next.Next.Next.Next)
+	ListMatchSlice(t, l, []int{1, 4, 3, 2, 5})
 
-	assert.Equal(t, (*ListNode)(nil), reverseBetween(nil, 2, 4))
+	assert.Nil(t, reverseBetween(nil, 2, 4))
 
-	l = &ListNode{
-		Val: 5,
-	}
+	l = NewList([]int{5})
 
 	assert.Equal(t, l, reverseBetween(l, 2, 4))
 	assert.Equal(t, l, reverseBetween(l, 0, 0))
 
-	l = &ListNode{
-		3, &ListNode{5, nil},
-	}
+	l = NewList([]int{3, 5})
 	l = reverseBetween(l, 1, 2)
-	assert.Equal(t, 5, l.Val)
-	assert.Equal(t, 3, l.Next.Val)
+	ListMatchSlice(t, l, []int{5, 3})
 }

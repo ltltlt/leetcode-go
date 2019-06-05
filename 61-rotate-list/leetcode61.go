@@ -1,11 +1,8 @@
 package main
 
-import "fmt"
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+import (
+	. "github.com/ltltlt/leetcode-util/listutil"
+)
 
 func rotateRight(head *ListNode, k int) *ListNode {
 	if head == nil {

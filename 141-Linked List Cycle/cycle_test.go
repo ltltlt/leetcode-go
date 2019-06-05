@@ -3,13 +3,9 @@ package cycle_test
 import (
 	"testing"
 
+	. "github.com/ltltlt/leetcode-util/listutil"
 	"github.com/stretchr/testify/assert"
 )
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
 
 // O(n) time complexity(at most loop k+m times, m is the cycle length, k is the non-cycle length),
 // and O(1) space complexity
@@ -28,31 +24,18 @@ func hasCycle(head *ListNode) bool {
 	return false
 }
 
-func newList(nums []int) *ListNode {
-	if len(nums) == 0 {
-		return nil
-	}
-	head := &ListNode{Val: nums[0]}
-	current := head
-	for _, num := range nums[1:] {
-		current.Next = &ListNode{Val: num}
-		current = current.Next
-	}
-	return head
-}
-
 func TestHasCycle(t *testing.T) {
-	list := newList([]int{3, 2, 0, -4})
+	list := NewList([]int{3, 2, 0, -4})
 	list.Next.Next.Next.Next = list.Next
 	assert.True(t, hasCycle(list))
 
-	list = newList([]int{1})
+	list = NewList([]int{1})
 	assert.False(t, hasCycle(list))
 
-	list = newList([]int{1, 2})
+	list = NewList([]int{1, 2})
 	list.Next.Next = list
 	assert.True(t, hasCycle(list))
 
-	list = newList([]int{2, 2})
+	list = NewList([]int{2, 2})
 	assert.False(t, hasCycle(list))
 }
