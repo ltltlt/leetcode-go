@@ -1,3 +1,5 @@
+package lp_test
+
 // Beats 10% golang submissions
 // Too long, a little complicate
 // Note that this code is not strictness,
@@ -5,13 +7,8 @@
 
 // example: "aba"
 // start from ab, ba and aba, then expand
-package main
 
-import (
-	"fmt"
-)
-
-func longestPalindrome(s string) string {
+func longestPalindrome1(s string) string {
 	if len(s) < 2 {
 		return s
 	}
