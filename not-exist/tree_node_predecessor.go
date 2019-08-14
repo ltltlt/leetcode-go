@@ -42,3 +42,76 @@ func TestFindPredessor(t *testing.T) {
 	assert.Equal(t, findPredecessor(root, root).Val, -1)
 	assert.Nil(t, findPredecessor(root, root.Left))
 }
+
+func preorder(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+	result := []int{root.Val}
+	result = append(result, preorder(root.Left)...)
+	result = append(result, preorder(root.Right)...)
+	return result
+}
+
+func preorderIterative(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+	stack := []*TreeNode{root}
+	var result []int
+	for l := len(stack); l > 0; {
+		tail := stack[l-1]
+		stack = stack[:l-1]
+		result = append(result, tail.Val)
+		if tail.Right != nil {
+			stack = append(stack, tail.Right)
+		}
+		if tail.Left != nil {
+			stack = append(stack, tail.Left)
+		}
+	}
+	return result
+}
+
+func inorder(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+	result := inorder(root.Left)
+	result = append(result, root.Val)
+	return append(result, inorder(root.Right)...)
+}
+
+func inorderIterative(root *TreeNode) []int {
+	stack := pushAllLeft(root, nil)
+	result := make([]int, 0, len(stack))
+
+	for l := len(stack); l > 0; {
+		tail := stack[l-1]
+		stack = stack[:l-1]
+		result = append(result, tail.Val)
+		stack = pushAllLeft(tail.Right, stack)
+	}
+	return nil
+}
+
+func pushAllLeft(root *TreeNode, stack []*TreeNode) []*TreeNode {
+	for node := root; node != nil; node = node.Left {
+		stack = append(stack, node)
+	}
+	return stack
+}
+
+func postorder(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+	result := postorder(root.Left)
+	result = append(result, postorder(root.Right)...)
+	result = append(result, root.Val)
+	return result
+}
+
+func postorderIterative(root *TreeNode) []int {
+	// TODO
+}
