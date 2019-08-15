@@ -1,7 +1,5 @@
 package lp_test
 
-// TODO: bug exists
-
 import (
 	"testing"
 
@@ -11,6 +9,8 @@ import (
 // see https://segmentfault.com/a/1190000003914228
 
 // O(n) time and O(n) space
+
+// runtime beats 100% go submission
 
 // 冗余换来清晰
 
@@ -43,12 +43,16 @@ func longestPalindrome3(s string) string {
 			j := pos - (i - pos) // j surely >= 0
 			rlj := RL[j]
 			left := pos - (maxRight - pos) // left boundary of pos's palindrome string
-			jleft := j - rlj
-			if jleft <= left {
+			jleft := j - rlj + 1
+			if jleft > left { // 小回文且不到边界
 				RL[i] = rlj
 			} else {
 				_, r := extend(s1, i-(maxRight-i), maxRight)
 				RL[i] = r - i + 1
+				if r > maxRight {
+					maxRight = r
+					pos = i
+				}
 			}
 		}
 	}
@@ -70,7 +74,10 @@ func longestPalindrome3(s string) string {
 	return s[maxPos-radius : maxPos+radius]
 }
 
+// extend, assume s[i..j] is palindrome
 func extend(s []byte, i, j int) (int, int) {
+	i--
+	j++
 	for i >= 0 && j < len(s) && s[i] == s[j] {
 		i--
 		j++
@@ -83,13 +90,14 @@ func TestManacher(t *testing.T) {
 		input  string
 		output string
 	}{
+		{"ccc", "ccc"},
+		{"aba", "aba"},
 		{"abac", "aba"},
 		{"abbac", "abba"},
 		{"abcba", "abcba"},
 		{"abba", "abba"},
 		{"", ""},
 		{"1", "1"},
-		{"ccc", "ccc"},
 	} {
 		assert.Equalf(t, c.output, longestPalindrome3(c.input), "case %v fail", i)
 	}
