@@ -1,9 +1,5 @@
 package kth_test
 
-import (
-	. "github.com/ltltlt/leetcode-util/treeutil"
-)
-
 // plain solution: find minimun node, then call k-1 times to find successor
 
 /**

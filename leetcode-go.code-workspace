@@ -4,7 +4,7 @@
 			"path": "."
 		},
 		{
-			"path": "/home/ty-l8/go/src/github.com/ltltlt/leetcode-util"
+			"path": "~/go/src/github.com/ltltlt/leetcode-util"
 		}
 	],
 	"settings": {}

@@ -59,7 +59,8 @@ func preorderIterative(root *TreeNode) []int {
 	}
 	stack := []*TreeNode{root}
 	var result []int
-	for l := len(stack); l > 0; {
+	for len(stack) > 0 {
+		l := len(stack)
 		tail := stack[l-1]
 		stack = stack[:l-1]
 		result = append(result, tail.Val)
@@ -86,7 +87,8 @@ func inorderIterative(root *TreeNode) []int {
 	stack := pushAllLeft(root, nil)
 	result := make([]int, 0, len(stack))
 
-	for l := len(stack); l > 0; {
+	for len(stack) > 0 {
+		l := len(stack)
 		tail := stack[l-1]
 		stack = stack[:l-1]
 		result = append(result, tail.Val)
