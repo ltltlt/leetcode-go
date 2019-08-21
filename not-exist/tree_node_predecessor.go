@@ -1,4 +1,4 @@
-package tree_node_predecessor_test
+package not_exist_test
 
 import (
 	"testing"
